@@ -1,10 +1,29 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Reset Password Deep Link</title>
+  <script>
+    // Ambil token dari parameter URL
+    function getTokenFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('token');
+    }
+
+    // Update href saat halaman dimuat
+    window.addEventListener('DOMContentLoaded', function() {
+      const token = getTokenFromURL();
+      if (token) {
+        const link = document.getElementById('deepLink');
+        link.href = `myapp://reset-password?token=${token}`;
+      }
+    });
+  </script>
+</head>
 <body>
 
 <h1>Test Deep Link</h1>
 
-<a href="myapp://reset-password?token=d1330e595b85c80cb3ffed0b190a16a91576078e8bb6384e25b36ea685b600b6">
+<a id="deepLink" href="myapp://reset-password?token=default_token">
   Open App
 </a>
 
